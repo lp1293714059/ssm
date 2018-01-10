@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.mob.jekin.dao.TecherMapper" >
+  <resultMap id="techerResultMap" type="cn.mob.jekin.entity.Techer" >
+    <id column="techid" property="techid" jdbcType="VARCHAR" />
+    <result column="techname" property="techname" jdbcType="VARCHAR" />
+    <result column="speciality" property="speciality" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="techcourse" property="techcourse" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 用户列表 -->
+  <select id="getAll" parameterType="Techer" resultMap="techerResultMap">
+  	select * from techerinfo  
+  </select>
+ <insert id="addtecher" parameterType="Techer">  
+        insert into techerinfo(techid,techname,speciality,title,techcourse) values(#{techid},#{techname},#{speciality},#{title},#{techcourse})  
+    </insert>  
+    <insert id="addtecheruser" parameterType="Techer">  
+        insert into user(user_name,user_pass) values(#{techid},#{techid})  
+    </insert>  
+  <select id="getOne" parameterType="String" resultMap="techerResultMap">
+  	select * from techerinfo where techid=#{techid} 
+  </select>
+  <update id="edit" parameterType="Techer">  
+        update techerinfo set techid=#{techid},techname=#{techname},speciality=#{speciality},title=#{title},techcourse=#{techcourse} where techid=#{techid}
+    </update>
+    <delete id="deleteTecher" parameterType="Techer">  
+        delete from techerinfo where techid=#{techid}
+    </delete>
+</mapper>
